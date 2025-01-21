@@ -91,7 +91,7 @@
               
               <div class="col-md-6 pt-5">
                   <h4 class="mb-4">Napíšte nám pripomienku</h4>
-                  <form>
+                  <form method="POST" id="suggestionForm">
                       <div class="row">
                           <div class="col-md-6 mb-3">
                               <label for="name" class="form-label">Meno</label>
@@ -110,7 +110,7 @@
                           <label for="message" class="form-label">Pripomienka</label>
                           <textarea class="form-control" id="message" rows="6" placeholder="Tu napíšte vašu pripomienku" required></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary">Odoslať</button>
+                      <button type="submit" onclick="sendSuggestion(event)" class="btn btn-primary">Odoslať</button>
                   </form>
               </div>
           </div>
@@ -125,5 +125,28 @@
     </footer> 
 
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+    function sendSuggestion(event) {
+      event.preventDefault(); 
+
+      const form = document.getElementById('suggestionForm');
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const suggestion = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+
+      console.log("Pripomienka na odoslanie:", suggestion);
+      alert("Vaša pripomienka bola úspešne odoslaná. Ďakujeme!");
+      form.reset(); // Vymaže formulár po odoslaní
+  }
+  </script>
   </body>
 </html>
