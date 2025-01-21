@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uniza AV Studio</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon/school.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body class="bg-light">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5 ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img src="images/logo.svg" style="width:380px;" alt="uniza logo" ></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active text-white ms-3 " aria-current="page" href="about.html">O nás</a>
+            </div>
+            <!-- Položky napravo -->
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active text-white ms-3 " href="login.html"  tabindex="-1" aria-disabled="true">Prihlásenie</a>
+              <a class="nav-link active text-white ms-3 " href="registration.html"  tabindex="-1" aria-disabled="true">Registrácia</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+  </header>
+  
+  <main>
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow" style="max-width: 600px; margin: auto;">
+              <div class="card-header bg-dark text-white text-center py-3">
+                <h3 class="mb-0">Registrácia</h3>
+              </div>
+              <div class="card-body bg-white p-4">
+                <form action="/register" method="POST">
+                  <div class="row">
+                    <!-- Prezývka -->
+                    <div class="col-md-6 mb-2">
+                      <label for="nickname" class="form-label">Meno a priezvisko</label>
+                      <input type="text" class="form-control" id="nickname" name="nickname" required>
+                    </div>
+                    <!-- UNIZA Email -->
+                    <div class="col-md-6 mb-2">
+                      <label for="unizaEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="unizaEmail" name="unizaEmail" required>
+                    </div>                          
+                    <!-- Heslo -->
+                    <div class="col-md-6 mb-2">
+                      <label for="password" class="form-label">Heslo</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <!-- Zopakujte heslo -->
+                    <div class="col-md-6 mb-3">
+                      <label for="passwordRepeat" class="form-label">Zopakovať heslo</label>
+                      <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" required>
+                    </div>
+                  </div>    
+                      <!-- Súhlasím s podmienkami -->
+                <!-- <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                  <label class="form-check-label" for="terms">
+                    Súhlasím s <a href="#" class="text-primary" style="text-decoration: none;">podmienkami používania</a> stránky Uniza AV Studio.
+                  </label>
+                </div>  -->           
+                  <button type="submit" class="btn btn-uniza">Zaregistrovať</button>            
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

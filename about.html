@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uniza AV Studio</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon/school.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5 ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img src="images/logo.svg" style="width:380px;" alt="uniza logo" ></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active text-white ms-3 " aria-current="page" href="about.html">O nás</a>
+            </div>
+            <!-- Položky napravo -->
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active text-white ms-3 " href="login.html"  tabindex="-1" aria-disabled="true">Prihlásenie</a>
+              <a class="nav-link active text-white ms-3 " href="registration.html"  tabindex="-1" aria-disabled="true">Registrácia</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+  </header>
+  
+    <main>
+      <section>
+        <div class="container mt-5">
+          <h2 class="text-center text-dark mb-4">Prenajímatelia AV techniky</h2>
+          <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4 text-center mb-4">
+              <div class="card border-0">
+                <img src="images/uhrina_avatar.png" alt="Michaela Holá" class="rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Ing. Miroslav Uhrina, PhD.</h5>
+                  <p class="card-text">
+                    <strong>Vedúci oddelenia MT</strong><br>
+                    Miestnosť: BB320<br>                
+                    E-mail: <a href="mailto:miroslav.uhrina@uniza.sk" style="text-decoration: none;color:#143956;">miroslav.uhrina@uniza.sk</a><br>
+                    Telefón: +421 41 513 2253
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-center mb-4">
+              <div class="card border-0">
+                <img src="images/bienik_avatar.jpg" alt="Juraj Bienik" class="rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Ing. Juraj Bienik, PhD.</h5>
+                  <p class="card-text">
+                    <strong>Študijný poradca MT</strong><br>
+                    Miestnosť: BB320<br>                
+                    E-mail:  <a href="mailto:juraj.bienik@uniza.sk" style="text-decoration: none;color:#143956;">juraj.bienik@uniza.sk</a><br>
+                    Telefón: +421 41 513 2049
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr>
+      <section>
+        <div class="container mb-4">
+          <h2 class="text-center text-dark mb-4">Kontaktné info a formulár</h2>
+          <div class="row">
+              <div class="col-md-6 pt-5">
+                  <h4 class="mb-4">Kontaktné informácie</h4>
+                  <p><strong>Adresa:</strong> Univerzitný bunker, Vysokoškolákov 26, 010 01 Žilina-Vlčince</p>
+                  <p><strong>Telefónny kontakt:</strong> +421 432 342 543</p>
+                  <p><strong>Emailový kontakt:</strong> avstudio@uniza.sk</p>
+                  <p>V prípade akýchkoľvek otázok neváhajte nás kontaktovať !</p>
+                  <iframe 
+                      src="https://www.google.com/maps/embed?pb=!4v1733240728888!6m8!1m7!1sCAoSLEFGMVFpcE1rNzh0V0pVLTFjRGZzZWk3WVNXX01aQUhGTmtBSjBqejUyVVM4!2m2!1d49.20929967745744!2d18.75591488392998!3f258.0952727316278!4f6.529877863686778!5f0.7820865974627469"
+                      width="100%"
+                      height="250" 
+                      style="border:0;" 
+                      allowfullscreen="" 
+                      loading="lazy" 
+                      referrerpolicy="no-referrer-when-downgrade">
+                  </iframe>
+                  
+              </div>
+              
+              <div class="col-md-6 pt-5">
+                  <h4 class="mb-4">Napíšte nám pripomienku</h4>
+                  <form>
+                      <div class="row">
+                          <div class="col-md-6 mb-3">
+                              <label for="name" class="form-label">Meno</label>
+                              <input type="text" class="form-control" id="name" placeholder="Meno" required>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                              <label for="email" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="email" placeholder="Email" required>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <label for="subject" class="form-label">Predmet </label>
+                          <input type="text" class="form-control" id="subject" placeholder="Predmet" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="message" class="form-label">Pripomienka</label>
+                          <textarea class="form-control" id="message" rows="6" placeholder="Tu napíšte vašu pripomienku" required></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Odoslať</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </section>
+      
+    
+    </main>
+
+    <footer class="bg-dark text-center py-4">
+      © 2024 Žilinská univerzita v Žiline. Všetky práva vyhradené.
+    </footer> 
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

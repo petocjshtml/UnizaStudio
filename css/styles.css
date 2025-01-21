@@ -1,0 +1,30 @@
+.bg-dark {
+    background-color: #143956 !important;
+    color: #fff !important; 
+  }
+
+.text-dark {
+  color: #143956 !important; 
+}
+
+#UnizaCarousel img {
+  min-height: 150px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.btn-uniza {
+  background-color: #ffffff;    
+  border: 2px solid #1d3557;   
+  color: #1d3557;               
+  padding: 8px 20px;           
+}
+
+.btn-uniza:hover {
+  background-color: #1d3557;    
+  color: #ffffff;               
+}
