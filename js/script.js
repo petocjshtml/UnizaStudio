@@ -8,9 +8,9 @@ function loadProfile(user_id)
 {
     //simulujem vytiahnutie profilu z backendu
     const profile = {
-        nickname: "Ján Slota",
+        nickname: "Gusto Mrkvička",
         phone: "0944198134",
-        email: "janslota@stud.uniza.sk",
+        email: "gustomrkvicka@stud.uniza.sk",
         image: "https://upload.wikimedia.org/wikipedia/commons/7/74/Zilina_P6112384-selection.jpg",
         type: "student",
         is_verified: false,
