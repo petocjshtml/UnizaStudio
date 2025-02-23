@@ -37,13 +37,13 @@
 
 <script>
    // Tento kód sa spustí hneď po vložení komponentu
-   console.log("Komponent načítaný a skript vykonaný.");
+   //console.log("Komponent načítaný a skript vykonaný.");
    // Napríklad: automaticky spusti carousel, ak je tento kód súčasťou daného komponentu
    var carousel = document.getElementById("UnizaCarousel");
    if (carousel && typeof bootstrap !== "undefined") {
       var carouselInstance = new bootstrap.Carousel(carousel, { interval: false });
       setInterval(function () {
-         console.log("posúvam..");
+         //console.log("posúvam..");
          carouselInstance.next();
       }, 3000);
    }
