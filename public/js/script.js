@@ -1,5 +1,26 @@
 // globálny javascript
 
+async function checkLoginStatus() {
+   // 3 stavy: "verified-user","verified-admin","unverified"
+   //neskôr dopísať túto funkciu keď už bude backend aby fungovala ako má!
+   let loginStatus = "unverified";
+
+   switch (loginStatus) {
+      case "unverified":
+         loadComponent("header", "components/global_components/header.html");
+         loadComponent("root", "components/home.html");
+         break;
+      case "verified-user":
+         break;
+      case "verified-admin":
+         break;
+
+      default:
+         break;
+   }
+   return "unverified";
+}
+
 async function loadComponent(targetId, componentPath) {
    const targetElement = document.getElementById(targetId);
    const response = await fetch(componentPath);
