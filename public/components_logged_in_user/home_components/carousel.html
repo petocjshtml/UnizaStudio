@@ -1,0 +1,50 @@
+<!-- carousel.html -->
+<style></style>
+
+<section id="UnizaCarousel" class="carousel slide">
+   <div class="carousel-inner">
+      <div class="carousel-item active">
+         <img src="images/home/carousel/carousel_1.jpg" class="d-block w-100" alt="Image 1" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_2.jpg" class="d-block w-100" alt="Image 2" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_3.jpg" class="d-block w-100" alt="Image 3" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_4.jpg" class="d-block w-100" alt="Image 4" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_5.jpg" class="d-block w-100" alt="Image 5" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_6.jpg" class="d-block w-100" alt="Image 6" />
+      </div>
+      <div class="carousel-item">
+         <img src="images/home/carousel/carousel_7.jpg" class="d-block w-100" alt="Image 7" />
+      </div>
+   </div>
+   <button class="carousel-control-prev" type="button" data-bs-target="#UnizaCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#UnizaCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+   </button>
+</section>
+
+<script>
+   // Tento kód sa spustí hneď po vložení komponentu
+   //console.log("Komponent načítaný a skript vykonaný.");
+   // Napríklad: automaticky spusti carousel, ak je tento kód súčasťou daného komponentu
+   var carousel = document.getElementById("UnizaCarousel");
+   if (carousel && typeof bootstrap !== "undefined") {
+      var carouselInstance = new bootstrap.Carousel(carousel, { interval: false });
+      setInterval(function () {
+         //console.log("posúvam..");
+         carouselInstance.next();
+      }, 3000);
+   }
+</script>

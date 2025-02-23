@@ -3,7 +3,7 @@
 async function checkLoginStatus() {
    // 3 stavy: "verified-user","verified-admin","unverified"
    //neskôr dopísať túto funkciu keď už bude backend aby fungovala ako má!
-   let loginStatus = "unverified";
+   let loginStatus = "verified-user";
 
    switch (loginStatus) {
       case "unverified":
@@ -11,6 +11,8 @@ async function checkLoginStatus() {
          loadComponent("root", "components/home.html");
          break;
       case "verified-user":
+         loadComponent("header", "components_logged_in_user/global_components/header.html");
+         loadComponent("root", "components_logged_in_user/home.html");
          break;
       case "verified-admin":
          break;

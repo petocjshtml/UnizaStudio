@@ -1,0 +1,191 @@
+<!-- user_card.html -->
+<style></style>
+
+<section>
+   <div class="container py-5">
+      <div class="row align-items-start">
+         <div class="col-md-4 d-flex flex-column align-items-center">
+            <h1 class="mb-4" id="nickname-profile-header">aa</h1>
+            <div class="position-relative" style="width: 100%; max-width: 200px">
+               <img id="profile-image" src="" alt="Avatar" class="img-thumbnail w-100" />
+               <i
+                  class="fa fa-pen position-absolute top-0 end-0 text-dark bg-white rounded-circle p-1"
+                  id="image"
+                  name="image"
+                  style="cursor: pointer"
+                  onclick="edit('image')"
+               ></i>
+               <input type="file" id="upload-image" style="display: none" accept="image/*" onchange="previewImage(event)" />
+            </div>
+         </div>
+         <div class="col-md-8">
+            <form id="profile-form">
+               <div class="mb-4 mt-5 position-relative">
+                  <label for="nickname-input" class="form-label">Prezývka</label>
+                  <div class="position-relative">
+                     <input
+                        type="text"
+                        class="form-control"
+                        minlength="4"
+                        maxlength="20"
+                        title="Prezývka musí mať od 4 do 20 znakov."
+                        id="nickname"
+                        name="nickname"
+                        required
+                        disabled
+                     />
+                     <i
+                        class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+                        style="cursor: pointer"
+                        onclick="edit('nickname')"
+                     ></i>
+                  </div>
+               </div>
+               <div class="mb-4 position-relative">
+                  <label for="phone" class="form-label">Telefón</label>
+                  <div class="position-relative">
+                     <div class="input-group">
+                        <span class="input-group-text">+421</span>
+                        <input
+                           type="tel"
+                           class="form-control"
+                           id="phone"
+                           name="phone"
+                           pattern="[0-9]{9}"
+                           placeholder="XXXXXXXXX"
+                           aria-label="phone"
+                           required
+                           disabled
+                        />
+                     </div>
+
+                     <i
+                        class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+                        style="cursor: pointer"
+                        onclick="edit('phone')"
+                     ></i>
+                  </div>
+               </div>
+               <div class="mb-3 position-relative">
+                  <label for="email" class="form-label">Email</label>
+                  <div class="position-relative">
+                     <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="example@stud.uniza.sk"
+                        pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
+                        title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk"
+                        required
+                        disabled
+                     />
+                     <i
+                        class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+                        style="cursor: pointer"
+                        onclick="edit('email')"
+                     ></i>
+                  </div>
+               </div>
+            </form>
+
+            <div class="text-end mt-4" id="recovery_settings">
+               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Zmena hesla</button>
+               <button class="btn btn-danger" onclick="deleteAccount()">Vymazať účet</button>
+            </div>
+            <div class="text-end mt-4" id="save_changes" style="display: none">
+               <button class="btn btn-success" onclick="saveChanges()">Uložiť zmeny</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<script>
+   loadProfile = (user_id) => {
+      //simulujem vytiahnutie profilu z backendu
+      const profile = {
+         nickname: "Gusto Mrkvička",
+         phone: "0944198134",
+         email: "gustomrkvicka@stud.uniza.sk",
+         image: "https://png.pngtree.com/png-clipart/20231020/original/pngtree-avatar-of-a-brunette-man-png-image_13379740.png",
+         type: "student",
+         is_verified: false,
+      };
+      return profile;
+   };
+
+   const profile = loadProfile(); // Simulácia načítania profilu
+   document.getElementById("nickname-profile-header").innerText = profile.nickname;
+   document.getElementById("profile-image").src = profile.image;
+   document.getElementById("nickname").value = profile.nickname;
+   document.getElementById("phone").value = profile.phone.slice(1);
+   document.getElementById("email").value = profile.email;
+
+   edit = (id) => {
+      document.getElementById("recovery_settings").style.display = "none";
+      document.getElementById("save_changes").style.display = "block";
+      if (id !== "image") {
+         const editInput = document.getElementById(id);
+         editInput.disabled = false;
+         editInput.focus();
+      } else {
+         document.getElementById("upload-image").click();
+      }
+   };
+
+   saveChanges = () => {
+      const form = document.getElementById("profile-form");
+      if (!form.checkValidity()) {
+         form.reportValidity();
+         return;
+      }
+
+      const updated_user = {
+         nickname: document.getElementById("nickname").value,
+         phone: document.getElementById("phone").value,
+         email: document.getElementById("email").value,
+         image: null,
+      };
+
+      const imageFile = document.getElementById("upload-image").files[0];
+
+      if (imageFile) {
+         const reader = new FileReader();
+         reader.onload = function (e) {
+            updated_user.image = e.target.result;
+            console.log("user for update", updated_user);
+         };
+         reader.readAsDataURL(imageFile);
+      } else {
+         updated_user.image = document.getElementById("profile-image").src;
+         console.log("user for update", updated_user);
+      }
+
+      document.getElementById("recovery_settings").style.display = "revert";
+      document.getElementById("save_changes").style.display = "none";
+
+      document.getElementById("nickname").disabled = true;
+      document.getElementById("phone").disabled = true;
+      document.getElementById("email").disabled = true;
+   };
+
+   previewImage = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+         const reader = new FileReader();
+         reader.onload = function (e) {
+            document.getElementById("profile-image").src = e.target.result;
+         };
+         reader.readAsDataURL(file);
+      }
+   };
+
+   deleteAccount = () => {
+      if (confirm("Naozaj chcete zmazať svoj účet?")) {
+         const user_id = "some user id";
+         console.log("Vymazať účet s id:", user_id);
+         // Tu by ste odoslali požiadavku na zmazanie účtu na backend
+      }
+   };
+</script>
