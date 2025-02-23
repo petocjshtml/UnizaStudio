@@ -1,0 +1,170 @@
+<!-- register_form.html -->
+<style>
+   .bg-dark {
+      background-color: #143956 !important;
+      color: #fff !important;
+   }
+
+   .btn-uniza {
+      background-color: #ffffff;
+      border: 2px solid #1d3557;
+      color: #1d3557;
+      padding: 8px 20px;
+   }
+
+   .btn-uniza:hover {
+      background-color: #1d3557;
+      color: #ffffff;
+   }
+
+   .btn-uniza-filled:hover {
+      background-color: #ffffff;
+      border: 2px solid #1d3557;
+      color: #1d3557;
+   }
+
+   .btn-uniza-filled {
+      background-color: #1d3557;
+      border: 2px solid #1d3557;
+      color: #ffffff;
+      padding: 8px 20px;
+   }
+</style>
+
+<section class="py-5">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col-lg-8">
+            <div class="card shadow" style="max-width: 600px; margin: auto">
+               <div class="card-header bg-dark text-white text-center py-3">
+                  <h3 class="mb-0">Registrácia</h3>
+               </div>
+               <div class="card-body bg-white p-4">
+                  <form method="POST" id="registrationForm">
+                     <div class="row">
+                        <!-- Prezývka -->
+                        <div class="col-12 mb-2">
+                           <label for="nickname" class="form-label">Prezývka</label>
+                           <input
+                              type="text"
+                              minlength="4"
+                              maxlength="20"
+                              title="Prezývka musí mať od 4 do 20 znakov."
+                              class="form-control"
+                              id="nickname"
+                              name="nickname"
+                              required
+                           />
+                        </div>
+
+                        <!-- Telefónne číslo-->
+                        <div class="col-md-6 mb-2">
+                           <label for="phone" class="form-label">Telefónne číslo</label>
+                           <div class="input-group">
+                              <span class="input-group-text">+421</span>
+                              <input
+                                 type="tel"
+                                 class="form-control"
+                                 id="phone"
+                                 name="phone"
+                                 pattern="[0-9]{9}"
+                                 placeholder="XXXXXXXXX"
+                                 required
+                                 aria-label="phone"
+                              />
+                           </div>
+                        </div>
+
+                        <!-- UNIZA Email -->
+                        <div class="col-md-6 mb-2">
+                           <label for="unizaEmail" class="form-label">Email (školský)</label>
+                           <input
+                              type="email"
+                              class="form-control"
+                              id="email"
+                              name="email"
+                              placeholder="example@stud.uniza.sk"
+                              pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
+                              title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk"
+                              required
+                           />
+                        </div>
+
+                        <!-- Heslo -->
+                        <div class="col-md-6 mb-2">
+                           <label for="password" class="form-label">Heslo</label>
+                           <input
+                              type="password"
+                              class="form-control"
+                              id="password"
+                              name="password"
+                              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                              title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                              required
+                           />
+                        </div>
+
+                        <!-- Zopakovať heslo -->
+                        <div class="col-md-6 mb-3">
+                           <label for="passwordRepeat" class="form-label">Zopakovať heslo</label>
+                           <input
+                              type="password"
+                              class="form-control"
+                              id="passwordRepeat"
+                              name="passwordRepeat"
+                              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                              title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                              required
+                           />
+                        </div>
+                     </div>
+                     <button type="submit" onclick="registerUser(event)" class="btn btn-uniza">Zaregistrovať</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<script>
+   function passwordsDoNotMatch(passwordInput, passwordRepeatInput) {
+      if (passwordInput.value !== passwordRepeatInput.value) {
+         passwordRepeatInput.setCustomValidity("Heslá sa nezhodujú!");
+      } else {
+         passwordRepeatInput.setCustomValidity("");
+      }
+   }
+
+   function setUpPasswordsMatchValidation() {
+      const passwordInput = document.getElementById("password");
+      const passwordRepeatInput = document.getElementById("passwordRepeat");
+      passwordInput.addEventListener("input", () => {
+         passwordsDoNotMatch(passwordInput, passwordRepeatInput);
+      });
+      passwordRepeatInput.addEventListener("input", () => {
+         passwordsDoNotMatch(passwordInput, passwordRepeatInput);
+      });
+   }
+
+   registerUser = (event) => {
+      event.preventDefault();
+      const form = document.getElementById("registrationForm");
+
+      // Kontrola, či je formulár platný (HTML5 validácia)
+      if (!form.checkValidity()) {
+         form.reportValidity();
+         return;
+      }
+
+      const user = {
+         nickname: document.getElementById("nickname").value,
+         phone: "0" + document.getElementById("phone").value,
+         email: document.getElementById("email").value,
+         password: document.getElementById("password").value,
+      };
+      console.log("Používateľ na zaregistrovanie:", user);
+   };
+
+   setUpPasswordsMatchValidation();
+</script>
