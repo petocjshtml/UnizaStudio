@@ -1,0 +1,77 @@
+<!-- header.html -->
+<style>
+   .bg-dark {
+      background-color: #143956 !important;
+      color: #fff !important;
+   }
+</style>
+
+<section>
+   <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="loadComponent('root', 'components_logged_in_admin/home.html'); return false;"
+               ><img src="images/header/logo.svg" style="width: 380px" alt="uniza logo"
+            /></a>
+            <button
+               class="navbar-toggler"
+               type="button"
+               data-bs-toggle="collapse"
+               data-bs-target="#navbarNavAltMarkup"
+               aria-controls="navbarNavAltMarkup"
+               aria-expanded="false"
+               aria-label="Toggle navigation"
+            >
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+               <div class="navbar-nav">
+                  <a
+                     class="nav-link active text-white ms-3"
+                     aria-current="page"
+                     href="#"
+                     onclick="loadComponent('root', 'components_logged_in_admin/rental.html'); return false;"
+                     >AV Požičovňa</a
+                  >
+                  <a
+                     class="nav-link active text-white ms-3"
+                     aria-current="page"
+                     href="#"
+                     onclick="loadComponent('root', 'components_logged_in_admin/leases.html'); return false;"
+                     >Výpožičky</a
+                  >
+                  <a
+                     class="nav-link active text-white ms-3"
+                     aria-current="page"
+                     href="#"
+                     onclick="loadComponent('root', 'components_logged_in_admin/users.html'); return false;"
+                     >Používatelia</a
+                  >
+               </div>
+               <!-- Položky napravo -->
+               <div class="navbar-nav ms-auto">
+                  <a
+                     class="nav-link active text-white ms-3"
+                     href="#"
+                     onclick="loadComponent('root', 'components_logged_in_admin/profile.html'); return false;"
+                     tabindex="-1"
+                     aria-disabled="true"
+                     >Profil</a
+                  >
+                  <a
+                     class="nav-link active text-white ms-3"
+                     style="cursor: pointer"
+                     tabindex="-1"
+                     aria-disabled="true"
+                     href="#"
+                     onclick="loadComponent('root', 'components/login.html'); return false;"
+                     >Odhlásiť sa</a
+                  >
+               </div>
+            </div>
+         </div>
+      </nav>
+   </header>
+</section>
+
+<script></script>
