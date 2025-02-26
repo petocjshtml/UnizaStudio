@@ -19,17 +19,19 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/public/**").permitAll()  // Verejné endpointy
-                        .requestMatchers("/api/user/**").authenticated()  // Iba prihlásení používatelia
-                        .anyRequest().authenticated()
+                        .requestMatchers("/js/**","/images/**","/css/**").permitAll() // Frontend
+                        .requestMatchers("/","/about","/login","/register").permitAll() // Verejné API endpointy
+                        .requestMatchers("/api/public/**").permitAll()  // Verejné API endpointy
+                        .requestMatchers("/api/user/**").authenticated()  // Chránené API endpointy
+                        .anyRequest().authenticated()  // Ostatné requesty vyžadujú autentifikáciu
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/index.html")  // Prihlásenie presmeruje na frontend
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/api/public/hello")
+                        .logoutSuccessUrl("/index.html")
                         .permitAll()
                 );
 
