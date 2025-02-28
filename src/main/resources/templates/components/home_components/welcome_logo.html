@@ -1,14 +1,11 @@
-<!-- welcome_logo.html -->
-<style></style>
-
-<section>
+<section th:fragment="welcome_logo">
    <div class="container-fluid bg-light">
       <div class="card shadow-sm">
          <img
-            src="images/home/welcome_logo/school.svg"
-            class="card-img-top img-fluid mx-auto d-block"
-            style="width: 40%; height: auto"
-            alt="Požičovňa AV Techniky"
+                 th:src="@{/images/home/welcome_logo/school.svg}"
+                 class="card-img-top img-fluid mx-auto d-block"
+                 style="width: 40%; height: auto"
+                 alt="Požičovňa AV Techniky"
          />
 
          <div class="card-body text-center">
@@ -18,5 +15,3 @@
       </div>
    </div>
 </section>
-
-<script></script>

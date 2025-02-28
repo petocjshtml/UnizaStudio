@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Root</title>
+   <title>Uniza Studio</title>
    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}" />
    <link th:href="@{/css/bs/bootstrap.min.css}" rel="stylesheet">
    <link th:href="@{/css/fa/all.min.css}" rel="stylesheet">
@@ -11,8 +11,7 @@
 </head>
 <body>
 
-<!-- Dynamické načítanie headera z `components/global_components/` -->
-<div th:replace="components/global_components/header :: header"></div>
+<!-- Dynamické načítanie obsahu stránky -->
 <div th:replace="${content}"></div>
 
 <script th:src="@{/js/bs/bootstrap.bundle.min.js}"></script>

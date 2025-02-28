@@ -19,9 +19,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/js/**","/images/**","/css/**").permitAll() // Frontend
-                        .requestMatchers("/","/about","/login","/register").permitAll() // Verejné API endpointy
+                        // Povolenie verejného prístupu do priečinkov v resources/static
+                        .requestMatchers("/js/**","/images/**","/css/**").permitAll()
+                        // Frontend routes public controller
+                        .requestMatchers("/","/about","/login","/register").permitAll()
                         .requestMatchers("/api/public/**").permitAll()  // Verejné API endpointy
+                        .requestMatchers("/api/public/register").permitAll()
                         .requestMatchers("/api/user/**").authenticated()  // Chránené API endpointy
                         .anyRequest().authenticated()  // Ostatné requesty vyžadujú autentifikáciu
                 )

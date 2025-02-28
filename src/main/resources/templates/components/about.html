@@ -1,15 +1,7 @@
-<!-- about.html -->
-<style></style>
-
-<section>
-   <div id="lessors"></div>
-   <div id="contact_form"></div>
-   <div id="footer"></div>
+<!-- templates/components/about.html -->
+<section th:fragment="content">
+   <div th:replace="components/global_components/header :: header"></div>
+   <div th:replace="components/about_components/lessors :: lessors"></div>
+   <div th:replace="components/about_components/contact_form :: contact_form"></div>
+   <div th:replace="components/global_components/footer :: footer"></div>
 </section>
-
-<script>
-   loadComponent("header", "components/global_components/header.html");
-   loadComponent("lessors", "components/about_components/lessors.html");
-   loadComponent("contact_form", "components/about_components/contact_form.html");
-   loadComponent("footer", "components/global_components/footer.html");
-</script>

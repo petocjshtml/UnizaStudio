@@ -1,12 +1,12 @@
-<!-- home.html -->
-<style></style>
+<!-- templates/components/home.html -->
 <section th:fragment="content">
-<!--   <div th:replace="components/home_components/carousel :: carousel"></div>
-   <div th:replace="components/home_components/welcome_logo :: welcome_logo"></div>-->
+   <div th:replace="components/global_components/header :: header"></div>
+   <div th:replace="components/home_components/carousel :: carousel"></div>
+   <div th:replace="components/home_components/welcome_logo :: welcome_logo"></div>
    <div th:replace="components/home_components/base_categories :: base_categories"></div>
-   <!--<div th:replace="components/home_components/no_account :: no_account"></div>
+   <div th:replace="components/home_components/no_account :: no_account"></div>
    <div th:replace="components/home_components/faq :: faq"></div>
-   <div th:replace="components/global_components/footer :: footer"></div>-->
+   <div th:replace="components/global_components/footer :: footer"></div>
 </section>
 
 

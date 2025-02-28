@@ -1,12 +1,10 @@
 package com.example.UnizaStudio.services;
 
-import com.example.UnizaStudio.models.Role;
+import com.example.UnizaStudio.models.data_transfer_objects.RegisterDTO;
 import com.example.UnizaStudio.models.User;
 import com.example.UnizaStudio.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,21 +17,25 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(String username, String password) {
-        Optional<User> existingUser = userRepository.findByUsername(username);
-        if (existingUser.isPresent()) {
-            throw new RuntimeException("Username already taken!");
+    public String registerUser(RegisterDTO registerDTO) {
+        if (userRepository.findByEmail(registerDTO.getEmail()).isPresent()) {
+            return "Email už existuje!";
+        }
+        if (userRepository.findByNickname(registerDTO.getNickname()).isPresent()) {
+            return "Prezývka už existuje!";
+        }
+        if (!registerDTO.getPassword().equals(registerDTO.getPasswordRepeat())) {
+            return "Heslá sa nezhodujú!";
         }
 
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole(Role.USER);
+        user.setEmail(registerDTO.getEmail());
+        user.setNickname(registerDTO.getNickname());
+        // Telefónne číslo sa ukladá s predponou +421
+        user.setPhone("+421" + registerDTO.getPhone());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
-        return userRepository.save(user);
-    }
-
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        userRepository.save(user);
+        return "OK";
     }
 }
