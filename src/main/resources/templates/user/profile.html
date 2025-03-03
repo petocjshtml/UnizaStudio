@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uniza Studio</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}">
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'}" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/home}">
+        <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active text-white ms-3" th:href="@{/av-technics}" aria-current="page">AV Požičovňa</a>
+          <a class="nav-link active text-white ms-3" th:href="@{/my-technics}" aria-current="page">Moje výpožičky</a>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active text-white ms-3" th:href="@{/profile}" id="profile_link" tabindex="-1" aria-disabled="true"
+             th:text="${user.nickname}">Profil</a>
+          <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center">
+            <button type="submit" class="nav-link active text-white ms-3" style="background: none; border: none; padding: 0; line-height: inherit;">
+              Odhlásiť sa
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main class="container py-5">
+  <div class="row align-items-start">
+    <div class="col-md-4 d-flex flex-column align-items-center">
+      <h1 class="mb-4" id="nickname-profile-header">aa</h1>
+      <div class="position-relative" style="width: 100%; max-width: 200px;">
+        <img id="profile-image" th:src="@{/images/default-avatar.png}" alt="Avatar" class="img-thumbnail w-100">
+        <i class="fa fa-pen position-absolute top-0 end-0 text-dark bg-white rounded-circle p-1"
+           id="image" style="cursor: pointer;" onclick="edit('image')"></i>
+        <input type="file" id="upload-image" style="display:none;" accept="image/*" onchange="previewImage(event)">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <form id="profile-form">
+        <div class="mb-4 mt-5 position-relative">
+          <label for="nickname" class="form-label">Prezývka</label>
+          <div class="position-relative">
+            <input type="text" class="form-control" minlength="4" maxlength="20"
+                   title="Prezývka musí mať od 4 do 20 znakov." id="nickname" name="nickname" required disabled>
+            <i class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+               style="cursor: pointer;" onclick="edit('nickname')"></i>
+          </div>
+        </div>
+        <div class="mb-4 position-relative">
+          <label for="phone" class="form-label">Telefón</label>
+          <div class="position-relative">
+            <div class="input-group">
+              <span class="input-group-text">+421</span>
+              <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{9}"
+                     placeholder="XXXXXXXXX" aria-label="phone" required disabled>
+            </div>
+            <i class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+               style="cursor: pointer;" onclick="edit('phone')"></i>
+          </div>
+        </div>
+        <div class="mb-3 position-relative">
+          <label for="email" class="form-label">Email</label>
+          <div class="position-relative">
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@stud.uniza.sk"
+                   pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$" title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk"
+                   required disabled>
+            <i class="fa fa-pen position-absolute top-50 end-0 translate-middle-y text-dark bg-white rounded-circle p-1"
+               style="cursor: pointer;" onclick="edit('email')"></i>
+          </div>
+        </div>
+      </form>
+      <div class="text-end mt-4" id="recovery_settings">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Zmena hesla</button>
+        <button class="btn btn-danger" onclick="deleteAccount()">Vymazať účet</button>
+      </div>
+      <div class="text-end mt-4" id="save_changes" style="display:none;">
+        <button class="btn btn-success" onclick="saveChanges()">Uložiť zmeny</button>
+      </div>
+      <!-- Zmena hesla modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #0b2e4c; color: white;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Zmena hesla</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="changePasswordForm">
+                <label for="current_password" class="form-label">Aktuálne heslo</label>
+                <input type="password" class="form-control" id="current_password" name="current_password"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                       title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                       required>
+                <label for="new_password" class="form-label">Nové heslo</label>
+                <input type="password" class="form-control" id="new_password" name="new_password"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                       title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                       required>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="hide_modal_button" class="btn btn-secondary" data-bs-dismiss="modal">Zavrieť</button>
+              <button type="button" onclick="changePassword()" class="btn btn-primary">Zmeniť heslo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Zmena hesla modal -->
+    </div>
+  </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/profile.js}"></script>
+</body>
+</html>
