@@ -25,9 +25,10 @@
                     <a class="nav-link active text-white ms-3" th:href="@{/my-technics}" aria-current="page">Moje výpožičky</a>
                 </div>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active text-white ms-3" th:href="@{/profile}" id="profile_link" tabindex="-1" aria-disabled="true"
-                       th:text="${user.nickname}">Profil</a>
-                        <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center">
+                    <a class="nav-link active text-white ms-3" th:href="@{/profile}" id="profile_link"
+                       tabindex="-1" aria-disabled="true"></a>
+
+                        <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center" onsubmit="deleteUserFromLS()">
                             <button type="submit" class="nav-link active text-white ms-3" style="background: none; border: none; padding: 0; line-height: inherit;">
                                 Odhlásiť sa
                             </button>
@@ -155,6 +156,6 @@
 </footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/logged_in.js}"></script>
 </body>
 </html>

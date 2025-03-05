@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Uniza Studio</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}" />
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uniza Studio - Požičaná technika</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
+<body class="bg-light">
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/home}">
+            <a class="navbar-brand" th:href="@{/admin-technics}">
                 <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -21,11 +21,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active text-white ms-3" th:href="@{/av-technics}" aria-current="page">AV Požičovňa</a>
-                    <a class="nav-link active text-white ms-3" th:href="@{/my-technics}" aria-current="page">Moje výpožičky</a>
+                    <a class="nav-link active text-white ms-3" th:href="@{/admin-users}" aria-current="page">Používatelia</a>
+                    <a class="nav-link active text-white ms-3" th:href="@{/admin-borrowed}" aria-current="page">Požičaná technika</a>
                 </div>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active text-white ms-3" th:href="@{/profile}" id="profile_link"
+                    <a class="nav-link active text-white ms-3" th:href="@{/admin-profile}" id="profile_link"
                        tabindex="-1" aria-disabled="true"></a>
 
                     <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center" onsubmit="deleteUserFromLS()">
@@ -41,8 +41,9 @@
 
 
 <main>
-    Moja technika
+    Tu sa bude zobrazovať a spravovať vypožičaná av technika
 </main>
+
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/logged_in.js}"></script>
 </body>

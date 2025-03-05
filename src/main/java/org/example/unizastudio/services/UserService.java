@@ -25,7 +25,7 @@ public class UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return false;
         }
-        user.setAdmin(false);
+        user.setAdmin(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
