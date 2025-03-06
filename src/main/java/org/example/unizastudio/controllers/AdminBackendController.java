@@ -1,12 +1,35 @@
 package org.example.unizastudio.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.unizastudio.services.UserService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.Map;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminBackendController {
-    @GetMapping("/admin/data")
-    public String adminData() {
-        return "Administrátorské dáta";
+    private final UserService userService;
+
+    public AdminBackendController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/edit-user")
+    public RedirectView editUser(@RequestBody Map<String, String> formData) {
+        Long id = Long.parseLong(formData.get("id"));
+        String email = formData.get("email");
+        String nickname = formData.get("nickname");
+        String phone = formData.get("phone");
+        boolean isAdmin = Boolean.parseBoolean(formData.get("isAdmin"));
+        String password = formData.get("password"); // Môže byť prázdne
+        userService.editUser(id, email, nickname, phone, isAdmin, password);
+        return new RedirectView("/admin-users");
+    }
+
+    @GetMapping("/delete-user")
+    public RedirectView deleteUser(@RequestParam("id") Long id) {
+        userService.deleteUser(id);
+        return new RedirectView("/admin-users");
     }
 }

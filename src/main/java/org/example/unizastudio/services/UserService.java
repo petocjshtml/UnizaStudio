@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -25,10 +27,16 @@ public class UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return false;
         }
-        user.setAdmin(true);
+        user.setAdmin(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> user.setPassword(null));
+        return users;
     }
 
     public User getCurrentUserSafe() {
@@ -41,5 +49,28 @@ public class UserService {
             user.setPassword(null);
         }
         return user;
+    }
+
+    @Transactional
+    public boolean editUser(Long id, String email, String nickname, String phone, boolean isAdmin, String password) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return false;
+        }
+        user.setEmail(email);
+        user.setNickname(nickname);
+        user.setPhone(phone);
+        user.setAdmin(isAdmin);
+        if (password != null && !password.isEmpty()) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
+        userRepository.save(user);
+        return true;
+    }
+
+
+    @Transactional
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }

@@ -1,10 +1,21 @@
 package org.example.unizastudio.controllers;
 
+import org.example.unizastudio.models.User;
+import org.example.unizastudio.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class AdminFrontendController {
+
+    private final UserService userService;
+
+    public AdminFrontendController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/admin-technics")
     public String adminInterface() {
@@ -12,7 +23,9 @@ public class AdminFrontendController {
     }
 
     @GetMapping("/admin-users")
-    public String adminUsers() {
+    public String adminUsers(Model model) {
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
         return "admin/admin_users";
     }
 
