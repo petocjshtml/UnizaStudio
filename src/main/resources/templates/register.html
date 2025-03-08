@@ -46,25 +46,15 @@
               <form method="POST" th:action="@{/public/register}" id="registrationForm">
                 <div class="row">
                   <!-- Prezývka -->
-                  <div class="col-12 mb-2">
+                  <div class="col-md-6 mb-2">
                     <label for="nickname" class="form-label">Prezývka</label>
                     <input type="text" minlength="4" maxlength="20" title="Prezývka musí mať od 4 do 20 znakov."
                            class="form-control" id="nickname" name="nickname" value="JozkoMrkva" required>
                   </div>
 
-                  <!-- Telefónne číslo -->
-                  <div class="col-md-6 mb-2">
-                    <label for="phone" class="form-label">Telefónne číslo</label>
-                    <div class="input-group">
-                      <span class="input-group-text">+421</span>
-                      <input type="tel" class="form-control" id="phone" name="phone"
-                             pattern="[0-9]{9}" placeholder="XXXXXXXXX" value="917782232" required aria-label="phone">
-                    </div>
-                  </div>
-
                   <!-- UNIZA Email -->
                   <div class="col-md-6 mb-2">
-                    <label for="email" class="form-label">Email (školský)</label>
+                    <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email"
                            placeholder="example@stud.uniza.sk"
                            pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"

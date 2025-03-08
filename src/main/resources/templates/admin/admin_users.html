@@ -51,7 +51,6 @@
             <th>ID</th>
             <th>Email</th>
             <th>Nickname</th>
-            <th>Telefón</th>
             <th>Admin</th>
             <th>Akcie</th>
         </tr>
@@ -62,7 +61,6 @@
             <td th:text="${user.id}">1</td>
             <td th:text="${user.email}">email@example.com</td>
             <td th:text="${user.nickname}">nickname</td>
-            <td th:text="${user.phone}">123456789</td>
             <td>
                 <span th:text="${user.isAdmin} ? 'Áno' : 'Nie'">Nie</span>
             </td>
@@ -72,7 +70,6 @@
                         th:attr="data-user-id=${user.id},
                  data-email=${user.email},
                  data-nickname=${user.nickname},
-                 data-phone=${user.phone},
                  data-is-admin=${user.isAdmin}">
                     <i class="bi bi-pencil bg-dark"></i>
                 </button>
@@ -108,10 +105,7 @@
                     <label class="form-label">Nickname</label>
                     <input type="text" class="form-control" name="nickname" value="${nickname}" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Telefón</label>
-                    <input type="text" class="form-control" name="phone" value="${phone}" required>
-                </div>
+
                 <div class="mb-3">
                     <label class="form-label">Admin</label>
                     <select class="form-control" name="isAdmin">

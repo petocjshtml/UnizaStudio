@@ -52,14 +52,13 @@ public class UserService {
     }
 
     @Transactional
-    public boolean editUser(Long id, String email, String nickname, String phone, boolean isAdmin, String password) {
+    public boolean editUser(Long id, String email, String nickname, boolean isAdmin, String password) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             return false;
         }
         user.setEmail(email);
         user.setNickname(nickname);
-        user.setPhone(phone);
         user.setAdmin(isAdmin);
         if (password != null && !password.isEmpty()) {
             user.setPassword(passwordEncoder.encode(password));

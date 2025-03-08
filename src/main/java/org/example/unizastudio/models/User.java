@@ -20,9 +20,6 @@ public class User {
     private String nickname;
 
     @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

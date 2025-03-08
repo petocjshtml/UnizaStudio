@@ -20,10 +20,9 @@ public class AdminBackendController {
         Long id = Long.parseLong(formData.get("id"));
         String email = formData.get("email");
         String nickname = formData.get("nickname");
-        String phone = formData.get("phone");
         boolean isAdmin = Boolean.parseBoolean(formData.get("isAdmin"));
         String password = formData.get("password"); // Môže byť prázdne
-        userService.editUser(id, email, nickname, phone, isAdmin, password);
+        userService.editUser(id, email, nickname, isAdmin, password);
         return new RedirectView("/admin-users");
     }
 
