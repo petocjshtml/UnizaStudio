@@ -1,128 +1,98 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Uniza Studio - Registrácia</title>
-  <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}">
-  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
-</head>
-<body class="bg-light">
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-    <div class="container-fluid">
-      <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active text-white ms-3" aria-current="page" th:href="@{/about}">O nás</a>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link active text-white ms-3" th:href="@{/login}" tabindex="-1" aria-disabled="true">Prihlásenie</a>
-          <a class="nav-link active text-white ms-3" th:href="@{/registration}" tabindex="-1" aria-disabled="true">Registrácia</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
+    <div th:replace="fragments/head :: head('Uniza Studio - Registrácia',false)"></div>
+    <body class="bg-light">
+        <div th:replace="fragments/header :: header"></div>
+        <main>
+          <section class="py-5 bg-light">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <div class="card shadow" style="max-width: 600px; margin: auto;">
+                    <div class="card-header bg-dark text-white text-center py-3">
+                      <h3 class="mb-0">Registrácia</h3>
+                    </div>
+                    <div class="card-body bg-white p-4">
+                      <!-- Zmenený th:action na /public/register -->
+                      <form method="POST" th:action="@{/public/register}" id="registrationForm">
+                        <div class="row">
+                          <!-- Prezývka -->
+                          <div class="col-md-6 mb-2">
+                            <label for="nickname" class="form-label">Prezývka</label>
+                            <input type="text" minlength="4" maxlength="20" title="Prezývka musí mať od 4 do 20 znakov."
+                                   class="form-control" id="nickname" name="nickname" value="JozkoMrkva" required>
+                          </div>
 
-<main>
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="card shadow" style="max-width: 600px; margin: auto;">
-            <div class="card-header bg-dark text-white text-center py-3">
-              <h3 class="mb-0">Registrácia</h3>
-            </div>
-            <div class="card-body bg-white p-4">
-              <!-- Zmenený th:action na /public/register -->
-              <form method="POST" th:action="@{/public/register}" id="registrationForm">
-                <div class="row">
-                  <!-- Prezývka -->
-                  <div class="col-md-6 mb-2">
-                    <label for="nickname" class="form-label">Prezývka</label>
-                    <input type="text" minlength="4" maxlength="20" title="Prezývka musí mať od 4 do 20 znakov."
-                           class="form-control" id="nickname" name="nickname" value="JozkoMrkva" required>
-                  </div>
+                          <!-- UNIZA Email -->
+                          <div class="col-md-6 mb-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="example@stud.uniza.sk"
+                                   pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
+                                   value="soltys10@stud.uniza.sk"
+                                   title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk" required>
+                          </div>
 
-                  <!-- UNIZA Email -->
-                  <div class="col-md-6 mb-2">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email"
-                           placeholder="example@stud.uniza.sk"
-                           pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
-                           value="soltys10@stud.uniza.sk"
-                           title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk" required>
-                  </div>
+                          <!-- Heslo -->
+                          <div class="col-md-6 mb-2">
+                            <label for="password" class="form-label">Heslo</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                                   title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                                   value="Uniza123."
+                                   required>
+                          </div>
 
-                  <!-- Heslo -->
-                  <div class="col-md-6 mb-2">
-                    <label for="password" class="form-label">Heslo</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
-                           title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
-                           value="Uniza123."
-                           required>
-                  </div>
-
-                  <!-- Zopakovať heslo -->
-                  <div class="col-md-6 mb-3">
-                    <label for="passwordRepeat" class="form-label">Zopakovať heslo</label>
-                    <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat"
-                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
-                           title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
-                           value="Uniza123."
-                           required>
+                          <!-- Zopakovať heslo -->
+                          <div class="col-md-6 mb-3">
+                            <label for="passwordRepeat" class="form-label">Zopakovať heslo</label>
+                            <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat"
+                                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                                   title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                                   value="Uniza123."
+                                   required>
+                          </div>
+                        </div>
+                        <!-- Odstránený onclick – formulár sa odošle prirodzene -->
+                        <button type="submit" class="btn btn-uniza">Zaregistrovať</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
-                <!-- Odstránený onclick – formulár sa odošle prirodzene -->
-                <button type="submit" class="btn btn-uniza">Zaregistrovať</button>
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+          </section>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script>
+          function passwordsDoNotMatch(passwordInput, passwordRepeatInput) {
+            if (passwordInput.value !== passwordRepeatInput.value) {
+              passwordRepeatInput.setCustomValidity("Heslá sa nezhodujú!");
+            } else {
+              passwordRepeatInput.setCustomValidity("");
+            }
+          }
 
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script>
-  function passwordsDoNotMatch(passwordInput, passwordRepeatInput) {
-    if (passwordInput.value !== passwordRepeatInput.value) {
-      passwordRepeatInput.setCustomValidity("Heslá sa nezhodujú!");
-    } else {
-      passwordRepeatInput.setCustomValidity("");
-    }
-  }
+          function setUpPasswordsMatchValidation() {
+            const passwordInput = document.getElementById('password');
+            const passwordRepeatInput = document.getElementById('passwordRepeat');
+            passwordInput.addEventListener('input', () => {
+              passwordsDoNotMatch(passwordInput, passwordRepeatInput);
+            });
+            passwordRepeatInput.addEventListener('input', () => {
+              passwordsDoNotMatch(passwordInput, passwordRepeatInput);
+            });
+          }
 
-  function setUpPasswordsMatchValidation() {
-    const passwordInput = document.getElementById('password');
-    const passwordRepeatInput = document.getElementById('passwordRepeat');
-    passwordInput.addEventListener('input', () => {
-      passwordsDoNotMatch(passwordInput, passwordRepeatInput);
-    });
-    passwordRepeatInput.addEventListener('input', () => {
-      passwordsDoNotMatch(passwordInput, passwordRepeatInput);
-    });
-  }
+          // Zabezpečíme, aby sa formulár odoslal len ak je platný
+          document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            if (!this.checkValidity()) {
+              event.preventDefault();
+              this.reportValidity();
+            }
+          });
 
-  // Zabezpečíme, aby sa formulár odoslal len ak je platný
-  document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    if (!this.checkValidity()) {
-      event.preventDefault();
-      this.reportValidity();
-    }
-  });
-
-  setUpPasswordsMatchValidation();
-</script>
-</body>
+          setUpPasswordsMatchValidation();
+        </script>
+    </body>
 </html>

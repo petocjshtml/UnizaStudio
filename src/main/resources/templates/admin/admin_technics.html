@@ -1,49 +1,88 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Uniza Studio - Správa techniky</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-</head>
-<body class="bg-light">
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/admin-technics}">
-                <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active text-white ms-3" th:href="@{/admin-users}" aria-current="page">Používatelia</a>
-                    <a class="nav-link active text-white ms-3" th:href="@{/admin-borrowed}" aria-current="page">Požičaná technika</a>
+    <div th:replace="fragments/head :: head('Uniza Studio - Správa používateľov',true)"></div>
+    <body class="bg-light">
+        <div th:replace="fragments/header :: header"></div>
+        <main class="container my-4">
+            <button type="button" onclick="addAvTechnicsModal()"
+                    class="btn btn-block btn-uniza" id="addAvTechnics">Pridať techniku</button>
+            <div th:replace="fragments/modal :: genericModal"></div>
+
+            <form th:action="@{/admin/images/upload}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label">Vyber obrázok</label>
+                    <input type="file" class="form-control" id="fileInput" name="file" accept="image/*" required>
                 </div>
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active text-white ms-3" th:href="@{/admin-profile}" id="profile_link"
-                       tabindex="-1" aria-disabled="true"></a>
+                <button type="submit" class="btn btn-primary">Nahraj obrázok</button>
+            </form>
+            <!-- Prípadne zobraz URL alebo výsledok -->
+            <div id="uploadResult"></div>
 
-                        <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center" onsubmit="deleteUserFromLS()">
-                            <button type="submit" class="nav-link active text-white ms-3" style="background: none; border: none; padding: 0; line-height: inherit;">
-                                Odhlásiť sa
-                            </button>
-                        </form>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/logged_in.js}"></script>
+        <script>
+            function addAvTechnicsModal() {
+                document.getElementById("modalContent").innerHTML = `
+                  <form id="addTechForm">
+                    <div class="mb-3">
+                      <label class="form-label">Názov techniky</label>
+                      <input type="text" class="form-control" name="techName" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Kategória</label>
+                      <select class="form-control" name="category" required>
+                        <option value="">Vyberte kategóriu</option>
+                        <option value="audio">Audio</option>
+                        <option value="video">Video</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Podkategória</label>
+                      <select class="form-control" name="subCategory" required>
+                        <option value="">Vyberte podkategóriu</option>
+                        <option value="mikrofóny">Mikrofóny</option>
+                        <option value="kamery">Kamery</option>
+                        <!-- Pridajte ďalšie možnosti podľa potreby -->
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Popis</label>
+                      <textarea class="form-control" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Obrázok techniky</label>
+                      <input type="file" class="form-control" name="image" id="techImageInput" accept="image/*">
+                      <img id="imagePreview" src="" alt="Náhľad obrázka" style="display: none; max-width: 100%; margin-top: 10px;">
+                    </div>
+                  </form>
+                  `;
+                document.getElementById("genericModalLabel").innerText = "Pridať AV techniku";
+                document.getElementById("modalSaveButton").onclick = addAvTechnics;
 
-<main>
-    Tu sa bude spravovať AV Technika, pridávať a mazať jej objekty
-</main>
+                const imageInput = document.getElementById("techImageInput");
+                imageInput.addEventListener("change", function() {
+                    const file = this.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const imagePreview = document.getElementById("imagePreview");
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = "block";
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
 
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/logged_in.js}"></script>
-</body>
+                let modalElement = document.getElementById("genericModal");
+                let modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+            }
+
+            function addAvTechnics()
+            {
+                console.log("aa");
+            }
+        </script>
+    </body>
 </html>

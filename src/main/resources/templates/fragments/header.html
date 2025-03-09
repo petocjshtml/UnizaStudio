@@ -1,0 +1,75 @@
+<header th:fragment="header"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
+        <div class="container-fluid">
+            <!-- Dynamické logo -->
+            <a class="navbar-brand"
+               th:if="${#authorization.expression('isAnonymous()')}"
+               th:href="@{/}">
+                <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
+            </a>
+            <a class="navbar-brand"
+               th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ADMIN'')')}"
+               th:href="@{/home}">
+                <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
+            </a>
+            <a class="navbar-brand"
+               th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+               th:href="@{/admin-technics}">
+                <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <!-- Pre verejných návštevníkov -->
+                    <a class="nav-link active text-white ms-3" th:href="@{/about}"
+                       sec:authorize="isAnonymous()">O nás</a>
+
+                    <!-- Pre prihlásených používateľov (okrem adminov) -->
+                    <a class="nav-link active text-white ms-3" th:href="@{/av-technics}"
+                       sec:authorize="isAuthenticated() and !hasRole('ADMIN')">AV Požičovňa</a>
+                    <a class="nav-link active text-white ms-3" th:href="@{/my-technics}"
+                       sec:authorize="isAuthenticated() and !hasRole('ADMIN')">Moje výpožičky</a>
+
+                    <!-- Pre administrátora -->
+                    <a class="nav-link active text-white ms-3" th:href="@{/admin-users}"
+                       sec:authorize="hasRole('ADMIN')">Používatelia</a>
+                    <a class="nav-link active text-white ms-3" th:href="@{/admin-borrowed}"
+                       sec:authorize="hasRole('ADMIN')">Požičaná technika</a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <!-- Prihlásenie a registrácia pre verejných návštevníkov -->
+                    <a class="nav-link active text-white ms-3" th:href="@{/login}"
+                       sec:authorize="isAnonymous()">Prihlásenie</a>
+                    <a class="nav-link active text-white ms-3" th:href="@{/register}"
+                       sec:authorize="isAnonymous()">Registrácia</a>
+
+                    <!-- Profil pre prihlásených používateľov -->
+                    <a class="nav-link active text-white ms-3 profile-link" th:href="@{/profile}"
+                       sec:authorize="isAuthenticated() and !hasRole('ADMIN')">Profil</a>
+                    <!-- Pre administrátora -->
+                    <a class="nav-link active text-white ms-3 profile-link" th:href="@{/admin-profile}"
+                       sec:authorize="hasRole('ADMIN')">Profil</a>
+
+
+                    <!-- Odhlásenie pre prihlásených používateľov -->
+                    <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center"
+                          onsubmit="deleteUserFromLS()" sec:authorize="isAuthenticated()">
+                        <button type="submit" class="nav-link active text-white ms-3"
+                                style="background: none; border: none; padding: 0; line-height: inherit;">
+                            Odhlásiť sa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+

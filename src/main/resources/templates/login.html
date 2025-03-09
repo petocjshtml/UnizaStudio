@@ -1,84 +1,55 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Uniza Studio - Prihlásenie</title>
-  <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}">
-  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
-</head>
-<body class="bg-light">
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-    <div class="container-fluid">
-      <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active text-white ms-3" th:href="@{/about}">O nás</a>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link active text-white ms-3" th:href="@{/login}" tabindex="-1" aria-disabled="true">Prihlásenie</a>
-          <a class="nav-link active text-white ms-3" th:href="@{/register}" tabindex="-1" aria-disabled="true">Registrácia</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<main>
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <div class="card shadow" style="max-width: 600px; margin: auto;">
-            <div class="card-header bg-dark text-white text-center py-3">
-              <h3 class="mb-0">Prihlásenie</h3>
-            </div>
-            <div class="card-body bg-white p-4">
-              <form th:action="@{/login}" method="post">
-                <div class="mb-3">
-                  <label for="username" class="form-label">Email (školský)</label>
-                  <!-- Použi name "username", pretože Spring Security očakáva tento parameter -->
-                  <input
-                          type="email"
-                          class="form-control"
-                          id="username"
-                          name="username"
-                          placeholder="example@stud.uniza.sk"
-                          pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
-                          title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk"
-                          value="soltys10@stud.uniza.sk"
-                          required
-                  >
+    <div th:replace="fragments/head :: head('Uniza Studio - Prihlásenie',false)"></div>
+    <body class="bg-light">
+        <div th:replace="fragments/header :: header"></div>
+        <main>
+          <section class="py-5 bg-light">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-6">
+                  <div class="card shadow" style="max-width: 600px; margin: auto;">
+                    <div class="card-header bg-dark text-white text-center py-3">
+                      <h3 class="mb-0">Prihlásenie</h3>
+                    </div>
+                    <div class="card-body bg-white p-4">
+                      <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                          <label for="username" class="form-label">Email (školský)</label>
+                          <input
+                                  type="email"
+                                  class="form-control"
+                                  id="username"
+                                  name="username"
+                                  placeholder="example@stud.uniza.sk"
+                                  pattern="^[a-zA-Z0-9._%+\-]+@(stud\.uniza\.sk|uniza\.sk)$"
+                                  title="Email musí končiť na @uniza.sk alebo na @stud.uniza.sk"
+                                  value="soltys10@stud.uniza.sk"
+                                  required
+                          >
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label">Heslo</label>
+                          <input
+                                  type="password"
+                                  class="form-control"
+                                  id="password"
+                                  name="password"
+                                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
+                                  title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
+                                  value="Uniza123."
+                                  required
+                          >
+                        </div>
+                        <button type="submit" class="btn btn-uniza">Prihlásiť sa</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Heslo</label>
-                  <input
-                          type="password"
-                          class="form-control"
-                          id="password"
-                          name="password"
-                          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
-                          title="Heslo musí obsahovať min. 8 znakov vrátane aspoň 1 malého písmena, 1 veľkého písmena a 1 špeciálneho znaku."
-                          value="Uniza123."
-                          required
-                  >
-                </div>
-                <button type="submit" class="btn btn-uniza">Prihlásiť sa</button>
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-</body>
+          </section>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
 </html>

@@ -1,185 +1,146 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Uniza Studio</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/universal/favicon/school.ico}" />
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
-</head>
-<body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/home}">
-                <img th:src="@{/images/universal/logo.svg}" style="width:380px;" alt="uniza logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active text-white ms-3" th:href="@{/av-technics}" aria-current="page">AV Požičovňa</a>
-                    <a class="nav-link active text-white ms-3" th:href="@{/my-technics}" aria-current="page">Moje výpožičky</a>
+    <div th:replace="fragments/head :: head('Uniza Studio - AV Technika',false)"></div>
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <main>
+            <div class="container mt-4">
+                <div class="btn-group me-3" role="group" aria-label="Basic checkbox toggle button group">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked />
+                    <label class="btn btn-outline-success" for="btncheck1">Audio</label>
+                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" />
+                    <label class="btn btn-outline-success" for="btncheck2">Video</label>
                 </div>
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active text-white ms-3" th:href="@{/profile}" id="profile_link"
-                       tabindex="-1" aria-disabled="true"></a>
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" checked />
+                    <label class="btn btn-outline-danger" for="btncheck3">Slúchadlá</label>
 
-                    <form th:action="@{/logout}" method="post" class="d-inline-flex align-items-center" onsubmit="deleteUserFromLS()">
-                        <button type="submit" class="nav-link active text-white ms-3" style="background: none; border: none; padding: 0; line-height: inherit;">
-                            Odhlásiť sa
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
+                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" checked />
+                    <label class="btn btn-outline-danger" for="btncheck4">Mikrofóny</label>
 
-
-
-<main>
-    <div class="container mt-4">
-        <div class="btn-group me-3" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked />
-            <label class="btn btn-outline-success" for="btncheck1">Audio</label>
-            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" />
-            <label class="btn btn-outline-success" for="btncheck2">Video</label>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            <!-- Pre unikátne ID, použijeme iné hodnoty -->
-            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" checked />
-            <label class="btn btn-outline-danger" for="btncheck3">Slúchadlá</label>
-
-            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" checked />
-            <label class="btn btn-outline-danger" for="btncheck4">Mikrofóny</label>
-
-            <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" />
-            <label class="btn btn-outline-danger" for="btncheck5">Audio káble</label>
-        </div>
-        <div class="input-group mb-3 mt-3">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon1" disabled>Vyhľadávanie</button>
-            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" />
-        </div>
-        <hr />
-        <div class="row mt-3" id="technics">
-            <!-- Card 1 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/headphones-1.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Slúchadlá 1</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
+                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" />
+                    <label class="btn btn-outline-danger" for="btncheck5">Audio káble</label>
+                </div>
+                <div class="input-group mb-3 mt-3">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon1" disabled>Vyhľadávanie</button>
+                    <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                </div>
+                <hr />
+                <div class="row mt-3" id="technics">
+                    <!-- Card 1 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/headphones-1.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Slúchadlá 1</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/headphone-2.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Slúchadlá 2</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/headphones-3.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Slúchadlá 3</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/headphones-4.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Slúchadlá 4</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-1.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 1</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-2.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 2</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-3.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 3</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-4.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 4</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 9 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-5.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 5</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 10 -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img th:src="@{/images/simulation/mic-6.jpg}" class="card-img-top" alt="mic1" />
+                            <div class="card-body">
+                                <h5 class="card-title">Mikrofón 6</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="btn btn-uniza">Rezervovať</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Card 2 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/headphone-2.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Slúchadlá 2</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/headphones-3.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Slúchadlá 3</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/headphones-4.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Slúchadlá 4</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-1.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 1</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 6 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-2.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 2</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 7 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-3.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 3</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 8 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-4.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 4</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 9 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-5.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 5</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 10 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img th:src="@{/images/simulation/mic-6.jpg}" class="card-img-top" alt="mic1" />
-                    <div class="card-body">
-                        <h5 class="card-title">Mikrofón 6</h5>
-                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                        <a href="#" class="btn btn-uniza">Rezervovať</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/logged_in.js}"></script>
-</body>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/logged_in.js}"></script>
+    </body>
 </html>

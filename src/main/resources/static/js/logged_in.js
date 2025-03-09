@@ -1,8 +1,6 @@
-function loadProfileNickName()
-{
+function loadProfileNickName() {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-    if(!storedUser)
-    {
+    if (!storedUser) {
         fetch('/user/me', {
             method: 'GET',
             credentials: 'include' // Pošle JSESSIONID cookie
@@ -10,18 +8,23 @@ function loadProfileNickName()
             .then(response => response.json())
             .then(user => {
                 localStorage.setItem("currentUser", JSON.stringify(user));
-                document.getElementById("profile_link").innerHTML=user.nickname;
+                updateProfileLinks(user.nickname);
             })
             .catch(error => console.error("Chyba pri získavaní údajov o používateľovi", error));
-    }
-    else
-    {
-        document.getElementById("profile_link").innerHTML=storedUser.nickname;
+    } else {
+        updateProfileLinks(storedUser.nickname);
     }
 }
 
-function deleteUserFromLS()
-{
+function updateProfileLinks(nickname) {
+    // Vyberieme všetky elementy s triedou profile-link a aktualizujeme ich text
+    const profileLinks = document.querySelectorAll('.profile-link');
+    profileLinks.forEach(link => {
+        link.innerHTML = nickname;
+    });
+}
+
+function deleteUserFromLS() {
     localStorage.removeItem("currentUser");
 }
 
