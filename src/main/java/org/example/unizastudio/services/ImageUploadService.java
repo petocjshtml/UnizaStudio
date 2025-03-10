@@ -1,14 +1,15 @@
 package org.example.unizastudio.services;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import org.example.unizastudio.config.CloudinaryProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ImageUploadService {
@@ -23,8 +24,14 @@ public class ImageUploadService {
         this.cloudinary = new Cloudinary(config);
     }
 
+    @SuppressWarnings("unchecked")
     public String uploadImage(MultipartFile file) throws IOException {
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        String originalFilename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()))
+                .replace(" ", "_");
+        Map<String, Object> options = new HashMap<>();
+        options.put("public_id", originalFilename);
+        options.put("folder", "unizaStudio/users");
+        Map<String, Object> uploadResult = (Map<String, Object>) cloudinary.uploader().upload(file.getBytes(), options);
         return uploadResult.get("secure_url").toString();
     }
 }

@@ -35,8 +35,15 @@ public class AdminFrontendController {
     }
 
     @GetMapping("/admin-profile")
-    public String adminProfile() {
+    public String adminProfile(Model model) {
+        User user = userService.getCurrentUserSafe();
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", user);
         return "admin/admin_profile";
     }
+
 }
 

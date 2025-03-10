@@ -20,6 +20,9 @@ public class User {
     private String nickname;
 
     @Column(nullable = false)
+    private String photo = "https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-174669.jpg";
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

@@ -1,10 +1,10 @@
 package org.example.unizastudio.controllers;
 
 import org.example.unizastudio.services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -15,15 +15,22 @@ public class AdminBackendController {
         this.userService = userService;
     }
 
-    @PostMapping("/edit-user")
-    public RedirectView editUser(@RequestBody Map<String, String> formData) {
-        Long id = Long.parseLong(formData.get("id"));
-        String email = formData.get("email");
-        String nickname = formData.get("nickname");
-        boolean isAdmin = Boolean.parseBoolean(formData.get("isAdmin"));
-        String password = formData.get("password"); // Môže byť prázdne
-        userService.editUser(id, email, nickname, isAdmin, password);
-        return new RedirectView("/admin-users");
+    @PostMapping(value = "/edit-user", consumes = "multipart/form-data")
+    public ResponseEntity<String> editUser(@RequestParam Long id,
+                                           @RequestParam String email,
+                                           @RequestParam String nickname,
+                                           @RequestParam(required = false) String password,
+                                           @RequestParam boolean isAdmin,
+                                           @RequestParam(required = false) MultipartFile photo) {
+        try {
+            boolean result = userService.editUser(id, email, nickname, photo, isAdmin, password);
+            if (!result) {
+                return ResponseEntity.badRequest().body("Chyba: Nepodarilo sa upraviť používateľa.");
+            }
+            return ResponseEntity.ok("Používateľ úspešne aktualizovaný!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Chyba: " + e.getMessage());
+        }
     }
 
     @GetMapping("/delete-user")

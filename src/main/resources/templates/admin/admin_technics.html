@@ -4,85 +4,11 @@
     <body class="bg-light">
         <div th:replace="fragments/header :: header"></div>
         <main class="container my-4">
-            <button type="button" onclick="addAvTechnicsModal()"
-                    class="btn btn-block btn-uniza" id="addAvTechnics">Pridať techniku</button>
-            <div th:replace="fragments/modal :: genericModal"></div>
-
-            <form th:action="@{/admin/images/upload}" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="fileInput" class="form-label">Vyber obrázok</label>
-                    <input type="file" class="form-control" id="fileInput" name="file" accept="image/*" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Nahraj obrázok</button>
-            </form>
-            <!-- Prípadne zobraz URL alebo výsledok -->
-            <div id="uploadResult"></div>
-
+            pridať techniku
         </main>
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
         <script th:src="@{/js/logged_in.js}"></script>
         <script>
-            function addAvTechnicsModal() {
-                document.getElementById("modalContent").innerHTML = `
-                  <form id="addTechForm">
-                    <div class="mb-3">
-                      <label class="form-label">Názov techniky</label>
-                      <input type="text" class="form-control" name="techName" required>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Kategória</label>
-                      <select class="form-control" name="category" required>
-                        <option value="">Vyberte kategóriu</option>
-                        <option value="audio">Audio</option>
-                        <option value="video">Video</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Podkategória</label>
-                      <select class="form-control" name="subCategory" required>
-                        <option value="">Vyberte podkategóriu</option>
-                        <option value="mikrofóny">Mikrofóny</option>
-                        <option value="kamery">Kamery</option>
-                        <!-- Pridajte ďalšie možnosti podľa potreby -->
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Popis</label>
-                      <textarea class="form-control" name="description" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Obrázok techniky</label>
-                      <input type="file" class="form-control" name="image" id="techImageInput" accept="image/*">
-                      <img id="imagePreview" src="" alt="Náhľad obrázka" style="display: none; max-width: 100%; margin-top: 10px;">
-                    </div>
-                  </form>
-                  `;
-                document.getElementById("genericModalLabel").innerText = "Pridať AV techniku";
-                document.getElementById("modalSaveButton").onclick = addAvTechnics;
-
-                const imageInput = document.getElementById("techImageInput");
-                imageInput.addEventListener("change", function() {
-                    const file = this.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const imagePreview = document.getElementById("imagePreview");
-                            imagePreview.src = e.target.result;
-                            imagePreview.style.display = "block";
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-
-                let modalElement = document.getElementById("genericModal");
-                let modalInstance = new bootstrap.Modal(modalElement);
-                modalInstance.show();
-            }
-
-            function addAvTechnics()
-            {
-                console.log("aa");
-            }
         </script>
     </body>
 </html>

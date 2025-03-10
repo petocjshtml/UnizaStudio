@@ -1,12 +1,56 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <div th:replace="fragments/head :: head('Uniza Studio - Profil',false)"></div>
+    <div th:replace="fragments/head :: head('Uniza Studio - Profil',true)"></div>
     <body class="bg-light">
         <div th:replace="fragments/header :: header"></div>
-        <main>
-            Admin profile
+
+        <main class="container my-5">
+            <div class="card shadow-lg p-4 bg-white rounded">
+                <div class="row align-items-center">
+                    <!-- Fotografia -->
+                    <div class="col-12 col-md-4 text-center">
+                        <img th:src="${user.photo}" alt="Profilová fotka"
+                             class="rounded-pill border border-5 border-info"
+                             style="width: 100%;">
+                    </div>
+
+                    <!-- Profilové údaje -->
+                    <div class="col-12 col-md-8 p-4 text-center text-md-start">
+                        <h1 class="fw-bold text-dark" th:text="${user.nickname}"></h1>
+                        <h4 class="text-info" th:text="${user.email}"></h4>
+
+                        <div class="mt-4">
+                            <button class="btn btn-uniza open-modal"
+                                    data-type="edit-profile"
+                                    th:data-email="${user.email}"
+                                    th:data-nickname="${user.nickname}"
+                                    th:data-photo="${user.photo}">
+                                Upraviť profil
+                            </button>
+
+                            <button class="btn btn-danger open-modal"
+                                    data-type="change-password">
+                                Zmena hesla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
+
+        <div th:replace="fragments/modal :: genericModal"></div>
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/profile.js}"></script>
         <script th:src="@{/js/logged_in.js}"></script>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
